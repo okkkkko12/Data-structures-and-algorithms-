@@ -1,1 +1,1 @@
-#starting off by defining the classes we wantt
+#starting off by defining the classes we want
