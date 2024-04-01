@@ -100,10 +100,10 @@ class HospitalManagementApp:
                                                     add_patient_window)).pack()
 
 
-def save_patient(self, patient_id, name, age, medical_history, window):
-          if not self.has_permission('add_patient'):
-                messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
-                return
+      def save_patient(self, patient_id, name, age, medical_history, window):
+            if not self.has_permission('add_patient'):
+                  messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
+                  return
                 
                 
             new_patient = {"patient_id": patient_id, "name": name, "age": age, "medical_history": medical_history}
@@ -112,9 +112,9 @@ def save_patient(self, patient_id, name, age, medical_history, window):
             window.destroy()  # Close the add patient window
 #def function for schedule_appointment to schedual for a patient consultation 
 
-def schedule_appointment(self):
-     if not self.has_permission('schedule_appointment'):
-          messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
+      def schedule_appointment(self):
+           if not self.has_permission('schedule_appointment'):
+            messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
             return
 
         schedule_appointment_window = tk.Toplevel(self.root)
@@ -151,7 +151,8 @@ def schedule_appointment(self):
         print(f"Appointment scheduled for {patient_id} with {doctor_name} on {appointment_date} at {appointment_time}.")
         window.destroy()  # Close the appointment window
 
-      
+
+
 
 
 
