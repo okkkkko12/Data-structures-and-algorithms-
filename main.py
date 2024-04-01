@@ -111,3 +111,11 @@ def schedule_appointment(self):
         tk.Label(schedule_appointment_window, text="Doctor Name:").pack()
         doctor_name_entry = tk.Entry(schedule_appointment_window)
         doctor_name_entry.pack()
+#appointment date info input
+        tk.Label(schedule_appointment_window, text="Appointment Date (YYYY-MM-DD):").pack()
+        appointment_date_entry = tk.Entry(schedule_appointment_window)
+        appointment_date_entry.pack()
+#appointment time info input
+        tk.Label(schedule_appointment_window, text="Appointment Time (HH:MM):").pack()
+        appointment_time_entry = tk.Entry(schedule_appointment_window)
+        appointment_time_entry.pack()
