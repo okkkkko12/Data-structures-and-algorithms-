@@ -226,4 +226,27 @@ class HospitalManagementApp:
 
 
 
+      def generate_reports(self):
+      # Define the functionality for generating reports here
+            pass
+
+      def has_permission(self, action):
+           # Logic to check if the current user role has permission for the given action
+             return action in user_roles_permissions.get(self.user_role, [])
+
+user_roles_permissions = {
+    'doctor': ['edit', 'add_prescription', 'edit_patient'],
+    'nurse': ['edit'],
+    'receptionist': ['edit', 'add_patient', 'schedule_appointment'],
+    'admin': ['edit', 'add_patient', 'schedule_appointment', 'add_prescription', 'edit_patient', 'manage_queue']
+}
+
+# Run the application
+# Run the application
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = HospitalManagementApp(root)
+    root.mainloop()
+
+
 
