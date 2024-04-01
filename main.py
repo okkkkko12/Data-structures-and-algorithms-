@@ -205,6 +205,8 @@ class HospitalManagementApp:
         if not self.consultation_queue:
             messagebox.showinfo("No Patients", "There are no patients in the consultation queue.")
             return
+        if self.has_permission('add_prescription'):
+            # Function to add prescription and handle patient removal
 
 
 
