@@ -205,25 +205,24 @@ class HospitalManagementApp:
         if not self.consultation_queue:
             messagebox.showinfo("No Patients", "There are no patients in the consultation queue.")
             return
-        if self.has_permission('add_prescription'):
-            # Function to add prescription and handle patient removal
-            def add_prescription():
-                  patient_name = selected_patient.get()
-                  patient = next((p for p in self.patients_list if p['name'] == patient_name), None)
-                  if patient:
-                        medication = medication_entry.get()
-                        dosage = dosage_entry.get()
-                        if 'medical_history' not in patient or not isinstance(patient['medical_history'], list):
-                              patient['medical_history'] = []
-                        patient['medical_history'].append(f"Prescription: {medication}, Dosage: {dosage}")
-                        messagebox.showinfo("Success", "Prescription added successfully.")
-                        # Remove the patient from the consultation queue
-                        self.consultation_queue.remove(patient)
-                        manage_prescriptions_window.destroy()
-                  else:
-                    messagebox.showinfo("Error", "Patient not found.")
-            tk.Button(manage_prescriptions_window, text="Add Prescription", command=add_prescription).pack()
 
+        if self.has_permission('add_prescription'):
+            manage_prescriptions_window = tk.Toplevel(self.root)
+            manage_prescriptions_window.title("Manage Prescriptions")
+
+            tk.Label(manage_prescriptions_window, text="Select Patient:").pack()
+            patient_names = [patient['name'] for patient in self.consultation_queue]  # Ensure this uses the queue
+            selected_patient = tk.StringVar()
+            selected_patient.set(patient_names[0] if patient_names else "No patients")
+            tk.OptionMenu(manage_prescriptions_window, selected_patient, *patient_names).pack()
+
+            tk.Label(manage_prescriptions_window, text="Medication:").pack()
+            medication_entry = tk.Entry(manage_prescriptions_window)
+            medication_entry.pack()
+
+            tk.Label(manage_prescriptions_window, text="Dosage:").pack()
+            dosage_entry = tk.Entry(manage_prescriptions_window)
+            dosage_entry.pack()
 
 
 
