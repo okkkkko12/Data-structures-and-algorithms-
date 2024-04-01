@@ -152,12 +152,11 @@ class HospitalManagementApp:
         window.destroy()  # Close the appointment window
 
     def manage_queue(self):
-        manage_queue_window = tk.Toplevel(self.root)
-        manage_queue_window.title("Manage Consultation Queue")
-
-        tk.Button(manage_queue_window, text="Add Patient to Queue", command=self.add_patient_to_queue).pack(fill=tk.X)
-
-        tk.Button(manage_queue_window, text="Process Next Patient", command=self.process_next_patient).pack(fill=tk.X)
+          manage_queue_window = tk.Toplevel(self.root)
+          manage_queue_window.title("Manage Consultation Queue")
+          
+          tk.Button(manage_queue_window, text="Add Patient to Queue", command=self.add_patient_to_queue).pack(fill=tk.X)
+          tk.Button(manage_queue_window, text="Process Next Patient", command=self.process_next_patient).pack(fill=tk.X)
 
 
 
