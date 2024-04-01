@@ -103,7 +103,7 @@ def schedule_appointment(self):
         schedule_appointment_window = tk.Toplevel(self.root)
         schedule_appointment_window.title("Schedule Appointment")
 
-# we want to assume the existence of a 'Doctor' class to get doctor names
+# want to assume the existence of a 'Doctor' class to get doctor names
         tk.Label(schedule_appointment_window, text="Patient ID:").pack()
         patient_id_entry = tk.Entry(schedule_appointment_window) #patient info input
         patient_id_entry.pack()
