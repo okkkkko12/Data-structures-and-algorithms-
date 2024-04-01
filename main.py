@@ -132,7 +132,12 @@ def schedule_appointment(self):
         if not self.has_permission('schedule_appointment'):
             messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
             return
+        # Save the appointment details, assuming appointments are stored similarly to patients
+        appointment = {"patient_id": patient_id, "doctor_name": doctor_name, "date": appointment_date,"time": appointment_time}
+        print(f"Appointment scheduled for {patient_id} with {doctor_name} on {appointment_date} at {appointment_time}.")
+        window.destroy()  # Close the appointment window
 
+      
 
 
 
