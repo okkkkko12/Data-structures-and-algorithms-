@@ -1,46 +1,96 @@
-import datetime
-
-class User:    # Creating user class to represent the user of the system
-  def __init__(self, employee_id, name, role):
-      self.employee_id = employee_id
-      self.name = name               # User name
-      self.role = role               # Any kind of rule(doctor, receptionist)
-    
-class authorized_user:    # A class to manage and handle user authentication
-    users = []                       # A class variable to hold the system users list
-
-    @classmethod
-    def add_user(cls, user):
-        cls.users.append(user)       # Will add new user to the list
-
-    @classmethod
-    def authenticate(cls, employee_id, name):
-        # Verify a user's identity using their name and employee ID.
-        for user in cls.users:
-            if user.employee_id == employee_id and user.name == name:
-                return user          # If found, it's will return user object
-        return None                  # Will return None if authentication fails
+import tkinter as tk
+from tkinter import messagebox 
 
      # Patient class for their information
 class Patient:
   def __int__(self, name, patient_id, medical_history, condition, admission_date=datetime.datetime.now()):
-    self.name = name                             # Patient's name
-    self.patient_id = patient_id                 # Patient's own id number
-    self.medical_history = medical_history       # Patient medical history
-    self.condition = condition                   # Patient current medical condition
-    self.admission_date = admission_date         # Admission date
+    self.patient_id = patient_id                             # Patient's id
+    self.name = name               
+    self.age = age
+    self.medical_history=medical_history
     
       # Represent medical prescriptions, using the prescription class
 class Prescription:
-  def __int__(self, patient_id, doctor_name, medication, date_issued=datetime.datetime.now()):
+  def __int__(self, patient_id, doctor_id, medication, dosage):
     self.patient_id = patient_id                  # The patient's ID is attached to the prescription
-    self.doctor_name = doctor_name                # Doctor name who prescribed the medication
+    self.doctor_id = doctor_id                # Doctor id who prescribed the medication
     self.medication = medication                  # Prescription medication
-    self.date_issued = date_issued                # The date on which the prescription was completed
+    self.dosage = dosage  
 
-      # Appointment class to manage betweens patients and doctors appointments
-class Appointment:
-  def __int__(self, patient_id, doctor_name, appointment_time):
-    self.patient_id = patient_id                  # Id of the patient booked appointment
-    self.doctor_name = doctor_name                # Appointment doctor name
-    self.appointment_time = appointment_time      # Appointment time
+class HospitalManagementApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Hospital Patient Record Management System")
+        self.user_role = 'admin'
+
+        # Initialize data structures
+        self.patients_list = []
+        self.prescriptions_list = []
+        self.consultation_queue = []
+
+        # Initially, hide main UI until role is selected
+        self.main_frame = tk.Frame(root)
+        self.main_frame.pack(fill=tk.BOTH, expand=True)
+        # Move button creation to a separate method
+        self.create_buttons()
+        # Show main UI directly
+        self.initialize_ui_based_on_role()
+
+    def initialize_ui_based_on_role(self):
+        self.show_ui_elements_based_on_role()
+        print(f"UI initialized for role: {self.user_role}")
+
+    def show_ui_elements_based_on_role(self):
+        buttons = {
+            'add_patient': self.add_patient_button,
+            'schedule_appointment': self.schedule_appointment_button,
+            'manage_queue': self.manage_queue_button,
+            'view_patient_history': self.view_patient_history_button,
+            'add_prescription': self.manage_prescriptions_button,
+            'generate_reports': self.generate_reports_button,
+        }
+
+        for action, button in buttons.items():
+            if self.has_permission(action):
+                button.pack(fill=tk.X)
+            else:
+                button.pack_forget()
+
+    def create_buttons(self):
+        # Creating buttons for different functionalities with instance variables and packing them
+        self.add_patient_button = tk.Button(self.main_frame, text="Add New Patient", command=self.add_patient)
+        self.schedule_appointment_button = tk.Button(self.main_frame, text="Schedule Appointment",command=self.schedule_appointment)
+      
+        self.manage_queue_button = tk.Button(self.main_frame, text="Manage Consultation Queue",command=self.manage_queue)
+        self.view_patient_history_button = tk.Button(self.main_frame, text="View Patient History", command=self.view_patient_history)
+      
+        self.manage_prescriptions_button = tk.Button(self.main_frame, text="Manage Prescriptions", command=self.manage_prescriptions)
+        self.generate_reports_button = tk.Button(self.main_frame, text="Generate Reports", command=self.generate_reports)
+
+        def add_patient(self):
+        if not self.has_permission('add_patient'):
+            messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
+            return
+
+        add_patient_window = tk.Toplevel(self.root)
+        add_patient_window.title("Add New Patient")
+
+        tk.Label(add_patient_window, text="Patient ID:").pack()
+        patient_id_entry = tk.Entry(add_patient_window)
+        patient_id_entry.pack()
+
+        tk.Label(add_patient_window, text="Name:").pack()
+        name_entry = tk.Entry(add_patient_window)
+        name_entry.pack()
+
+        tk.Label(add_patient_window, text="Age:").pack()
+        age_entry = tk.Entry(add_patient_window)
+        age_entry.pack()
+
+        tk.Label(add_patient_window, text="Medical History:").pack()
+        medical_history_entry = tk.Entry(add_patient_window)
+        medical_history_entry.pack()
+
+        tk.Button(add_patient_window, text="Add Patient",
+                  command=lambda: self.save_patient(patient_id_entry.get(),name_entry.get(),age_entry.get(), medical_history_entry.get(),add_patient_window)).pack()
+
