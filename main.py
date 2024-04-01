@@ -11,11 +11,12 @@ class Prescription:
             self.medication = medication                  # Prescription medication
             self.dosage = dosage  
 
+     # Define the hospital management add class
 class HospitalManagementApp:
       def __init__(self, root):
             self.root = root
             self.root.title("Hospital Patient Record Management System")
-            self.user_role = 'admin'
+            self.user_role = 'admin'                    # Default user role
 
         # Initialize data structures
             self.patients_list = []
@@ -31,10 +32,12 @@ class HospitalManagementApp:
         # Show main UI directly
             self.initialize_ui_based_on_role()
 
+        # Method to initialize UI elements based on the user role
       def initialize_ui_based_on_role(self):
             self.show_ui_elements_based_on_role()
             print(f"UI initialized for role: {self.user_role}")
-
+        
+      # Method to show UI elements based on the user role
       def show_ui_elements_based_on_role(self):
             buttons = {
             'add_patient': self.add_patient_button,
@@ -51,6 +54,7 @@ class HospitalManagementApp:
                   else:
                         button.pack_forget()
 
+        # Method for making buttons with various functions
       def create_buttons(self):
         # Creating buttons for different functionalities with instance variables and packing them
             self.add_patient_button = tk.Button(self.main_frame, text="Add New Patient", command=self.add_patient)
@@ -62,11 +66,12 @@ class HospitalManagementApp:
             self.manage_prescriptions_button = tk.Button(self.main_frame, text="Manage Prescriptions", command=self.manage_prescriptions)
             self.generate_reports_button = tk.Button(self.main_frame, text="Generate Reports", command=self.generate_reports)
 
+        # Adds new patient
       def add_patient(self):
             if not self.has_permission('add_patient'):
                   messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
                   return
-
+     
             add_patient_window = tk.Toplevel(self.root)
             add_patient_window.title("Add New Patient")
 
@@ -252,7 +257,8 @@ class HospitalManagementApp:
       def has_permission(self, action):
            # Logic to check if the current user role has permission for the given action
              return action in user_roles_permissions.get(self.user_role, [])
-
+            
+   # Set user roles and the permissions that go with them.
 user_roles_permissions = {
     'doctor': ['edit', 'add_prescription', 'edit_patient'],
     'nurse': ['edit'],
@@ -260,7 +266,6 @@ user_roles_permissions = {
     'admin': ['edit', 'add_patient', 'schedule_appointment', 'add_prescription', 'edit_patient', 'manage_queue']
 }
 
-# Run the application
 # Run the application
 if __name__ == "__main__":
     root = tk.Tk()
