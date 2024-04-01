@@ -85,16 +85,15 @@ class HospitalManagementApp:
             medical_history_frame.pack()
             medical_history_entries = []
 
-      def add_medical_history_entry():
-            entry = tk.Entry(medical_history_frame)
-            entry.pack()
-            medical_history_entries.append(entry)
+            def add_medical_history_entry():
+                  entry = tk.Entry(medical_history_frame)
+                  entry.pack()
+                  medical_history_entries.append(entry)
 
-        tk.Button(add_patient_window, text="Add Medical History Entry", command=add_medical_history_entry).pack()
-        add_medical_history_entry() 
+              tk.Button(add_patient_window, text="Add Medical History Entry", command=add_medical_history_entry).pack()
+              add_medical_history_entry() 
 
-        tk.Button(add_patient_window, text="Add Patient",
-                  command=lambda: self.save_patient(patient_id_entry.get(),
+              tk.Button(add_patient_window, text="Add Patient",command=lambda: self.save_patient(patient_id_entry.get(),
                                                     name_entry.get(),
                                                     age_entry.get(),
                                                     [entry.get() for entry in medical_history_entries],
