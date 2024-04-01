@@ -165,14 +165,15 @@ class HospitalManagementApp:
 
         # Adds new patient
       def add_patient(self):
+            # Check if the user has permission to add a patient
             if not self.has_permission('add_patient'):
                   messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
                   return
-     
+            # Create a new window for adding a patient
             add_patient_window = tk.Toplevel(self.root)
             add_patient_window.title("Add New Patient")
 
-            tk.Label(add_patient_window, text="Patient ID:").pack()
+            tk.Label(add_patient_window, text="Patient ID:").pack()  # Add labels and entry fields for patient information
             patient_id_entry = tk.Entry(add_patient_window)
             patient_id_entry.pack()
 
@@ -188,19 +189,21 @@ class HospitalManagementApp:
             medical_history_frame = tk.Frame(add_patient_window)
             medical_history_frame.pack()
             medical_history_entries = []
-
+            
+            # Define a function to dynamically add fields for medical history entry.
             def add_medical_history_entry():
                   entry = tk.Entry(medical_history_frame)
                   entry.pack()
                   medical_history_entries.append(entry)
-
+                  
+             # Create a button to add a medical history entry
             tk.Button(add_patient_window, text="Add Medical History Entry", command=add_medical_history_entry).pack()
             add_medical_history_entry() 
 
-            tk.Button(add_patient_window, text="Add Patient",command=lambda: self.save_patient(patient_id_entry.get(),
-                                                    name_entry.get(),
-                                                    age_entry.get(),
-                                                    [entry.get() for entry in medical_history_entries],
+            tk.Button(add_patient_window, text="Add Patient",command=lambda: self.save_patient(patient_id_entry.get(),  # Get patient ID from entry field
+                                                    name_entry.get(),    # Get name from entry field
+                                                    age_entry.get(),     # Get age from entry field
+                                                    [entry.get() for entry in medical_history_entries],  # Get medical history from entry fields
                                                     add_patient_window)).pack()
 
 
@@ -209,18 +212,19 @@ class HospitalManagementApp:
             messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
                   return
                 
-                
+              # Create a new patient dictionary with the provided information  
             new_patient = {"patient_id": patient_id, "name": name, "age": age, "medical_history": medical_history}
+            # Append the new patient to the patients list
             self.patients_list.append(new_patient)
-            print(f"Patient {name} added successfully.")
-            window.destroy()  # Close the add patient window
+            print(f"Patient {name} added successfully.")    # Print a success message
+            window.destroy()        # Close the add patient window
 #def function for schedule_appointment to schedual for a patient consultation 
 
       def schedule_appointment(self):
            if not self.has_permission('schedule_appointment'):
             messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
             return
-
+         # Create a new window for scheduling an appointment
         schedule_appointment_window = tk.Toplevel(self.root)
         schedule_appointment_window.title("Schedule Appointment")
 
@@ -282,10 +286,11 @@ class HospitalManagementApp:
 
 
     def display_queue(self):
+          # Check if the consultation queue is empty
         if not self.consultation_queue:
             messagebox.showinfo("Queue Empty", "There are no patients in the queue.")
             return
-
+          # Create a new window to display the queue
         queue_window = tk.Toplevel(self.root)
         queue_window.title("Patient Consultation Queue")
 
