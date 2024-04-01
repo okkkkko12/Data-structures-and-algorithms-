@@ -107,15 +107,18 @@ def schedule_appointment(self):
         tk.Label(schedule_appointment_window, text="Patient ID:").pack()
         patient_id_entry = tk.Entry(schedule_appointment_window) #patient info input
         patient_id_entry.pack()
-#doctor info input
+#doctor info input entry lable
         tk.Label(schedule_appointment_window, text="Doctor Name:").pack()
         doctor_name_entry = tk.Entry(schedule_appointment_window)
         doctor_name_entry.pack()
-#appointment date info input
+#appointment date info input entry lable
         tk.Label(schedule_appointment_window, text="Appointment Date (YYYY-MM-DD):").pack()
         appointment_date_entry = tk.Entry(schedule_appointment_window)
         appointment_date_entry.pack()
-#appointment time info input
+#appointment time info input entry lable
         tk.Label(schedule_appointment_window, text="Appointment Time (HH:MM):").pack()
         appointment_time_entry = tk.Entry(schedule_appointment_window)
         appointment_time_entry.pack()
+#creating a button to schedule an appointment
+        tk.Button(schedule_appointment_window, text="Schedule",command=lambda: self.save_appointment(patient_id_entry.get(),doctor_name_entry.get(), appointment_date_entry.get(), appointment_time_entry.get(), schedule_appointment_window)).pack()
+#then defining a lambda function to call the save_appointment method with the entry values
