@@ -3,7 +3,7 @@ from tkinter import messagebox
 
      # Patient class for their information
 class Patient:
-  def __int__(self, name, patient_id, medical_history, condition, admission_date=datetime.datetime.now()):
+  def __init__(self, name, patient_id, medical_history, condition, admission_date=datetime.datetime.now()):
     self.patient_id = patient_id                             # Patient's id
     self.name = name               
     self.age = age
@@ -11,7 +11,7 @@ class Patient:
     
       # Represent medical prescriptions, using the prescription class
 class Prescription:
-  def __int__(self, patient_id, doctor_id, medication, dosage):
+  def __init__(self, patient_id, doctor_id, medication, dosage):
     self.patient_id = patient_id                  # The patient's ID is attached to the prescription
     self.doctor_id = doctor_id                # Doctor id who prescribed the medication
     self.medication = medication                  # Prescription medication
@@ -122,3 +122,15 @@ def schedule_appointment(self):
 #creating a button to schedule an appointment
         tk.Button(schedule_appointment_window, text="Schedule",command=lambda: self.save_appointment(patient_id_entry.get(),doctor_name_entry.get(), appointment_date_entry.get(), appointment_time_entry.get(), schedule_appointment_window)).pack()
 #then defining a lambda function to call the save_appointment method with the entry values
+
+
+#new def fucntyino for saving the appointment
+    def save_appointment(self, patient_id, doctor_name, appointment_date, appointment_time, window):
+        if not self.has_permission('schedule_appointment'):
+            messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
+            return
+
+    def save_appointment(self, patient_id, doctor_name, appointment_date, appointment_time, window):
+        if not self.has_permission('schedule_appointment'):
+            messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
+            return
