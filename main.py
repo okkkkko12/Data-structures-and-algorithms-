@@ -62,13 +62,16 @@ class HospitalManagementApp:
             self.remove_patient_button.pack(fill=tk.X)
 
     def update_patient(self):
+          # Check if the user has permission to edit patient information
         if not self.has_permission('edit_patient'):
             messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
             return
 
+          # Create a new window for updating patient information
         update_window = tk.Toplevel(self.root)
         update_window.title("Update Patient Information")
 
+          # Entry fields for updating patient information
         tk.Label(update_window, text="Patient ID:").pack()
         patient_id_entry = tk.Entry(update_window)
         patient_id_entry.pack()
