@@ -54,6 +54,82 @@ class HospitalManagementApp:
                   else:
                         button.pack_forget()
 
+              if self.has_permission('edit_patient'):
+            self.update_patient_button.pack(fill=tk.X)
+            self.remove_patient_button.pack(fill=tk.X)
+
+    def update_patient(self):
+        if not self.has_permission('edit_patient'):
+            messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
+            return
+
+        update_window = tk.Toplevel(self.root)
+        update_window.title("Update Patient Information")
+
+        tk.Label(update_window, text="Patient ID:").pack()
+        patient_id_entry = tk.Entry(update_window)
+        patient_id_entry.pack()
+
+        tk.Label(update_window, text="Name:").pack()
+        name_entry = tk.Entry(update_window)
+        name_entry.pack()
+
+        tk.Label(update_window, text="Age:").pack()
+        age_entry = tk.Entry(update_window)
+        age_entry.pack()
+
+        tk.Label(update_window, text="Medical History (comma-separated):").pack()
+        medical_history_entry = tk.Entry(update_window)
+        medical_history_entry.pack()
+
+        def update_patient_details():
+            patient_id = patient_id_entry.get()
+            name = name_entry.get()
+            age = age_entry.get()
+            medical_history = medical_history_entry.get().split(',')
+
+            # Find and update the patient in the list
+            for patient in self.patients_list:
+                if patient['patient_id'] == patient_id:
+                    patient['name'] = name
+                    patient['age'] = age
+                    patient['medical_history'] = medical_history
+                    messagebox.showinfo("Success", f"Patient {name} updated successfully.")
+                    update_window.destroy()
+                    return
+            messagebox.showinfo("Error", "Patient not found.")
+
+        tk.Button(update_window, text="Update Patient", command=update_patient_details).pack()
+
+    def remove_patient(self):
+        remove_window = tk.Toplevel(self.root)
+        remove_window.title("Remove Patient")
+
+        tk.Label(remove_window, text="Patient ID:").pack()
+        patient_id_entry = tk.Entry(remove_window)
+        patient_id_entry.pack()
+
+        tk.Button(remove_window, text="Remove Patient",command=lambda: self.delete_patient(patient_id_entry.get(), remove_window)).pack()
+
+    def delete_patient(self, patient_id, window):
+        # Confirmation dialog
+        response = messagebox.askyesno("Confirm", "Are you sure you want to remove this patient?")
+        if response:
+            patient_found = any(patient['patient_id'] == patient_id for patient in self.patients_list)
+            if patient_found:
+                # Logic to remove the patient
+                self.patients_list = [patient for patient in self.patients_list if patient['patient_id'] != patient_id]
+                self.consultation_queue = [patient for patient in self.consultation_queue if
+                                           patient['patient_id'] != patient_id]
+                messagebox.showinfo("Success", "Patient removed successfully.")
+            else:
+                messagebox.showinfo("Error", "Patient not found.")
+            window.destroy()
+        else:
+            # If the user decides not to delete, do nothing (the confirmation dialog is closed, but the removal window stays open)
+            pass
+
+
         # Method for making buttons with various functions
       def create_buttons(self):
         # Creating buttons for different functionalities with instance variables and packing them
@@ -65,6 +141,8 @@ class HospitalManagementApp:
       
             self.manage_prescriptions_button = tk.Button(self.main_frame, text="Manage Prescriptions", command=self.manage_prescriptions)
             self.generate_reports_button = tk.Button(self.main_frame, text="Generate Reports", command=self.generate_reports)
+
+      
 
         # Adds new patient
       def add_patient(self):
