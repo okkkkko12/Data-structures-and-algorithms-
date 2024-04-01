@@ -176,6 +176,27 @@ class HospitalManagementApp:
             messagebox.showinfo("Info", "No patients in the queue.")
 
 
+    def view_patient_history(self):
+        if self.has_permission('view_patient_history'):
+            view_history_window = tk.Toplevel(self.root)
+            view_history_window.title("View Patient History")
+
+            tk.Label(view_history_window, text="Select Patient:").pack()
+            patient_names = [patient['name'] for patient in self.patients_list]
+            selected_patient = tk.StringVar()
+            selected_patient.set(patient_names[0])  # default value
+            patient_menu = tk.OptionMenu(view_history_window, selected_patient, *patient_names)
+            patient_menu.pack()
+
+            def show_history():
+                patient_name = selected_patient.get()
+                patient = next((p for p in self.patients_list if p['name'] == patient_name), None)
+                if patient:
+                    history_text = "\n".join(patient['medical_history'])
+                    messagebox.showinfo("Medical History", f"{patient_name}'s History:\n{history_text}")
+                else:
+                    messagebox.showinfo("Error", "Patient not found.")
+
 
 
 
