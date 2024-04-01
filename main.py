@@ -20,3 +20,11 @@ class authorized_user:    # A class to manage and handle user authentication
             if user.employee_id == employee_id and user.name == name:
                 return user          # If found, it's will return user object
         return None                  # Will return None if authentication fails
+
+class Patient:
+  def __int__(self, name, patient_id, medical_history, condition, admission_date=datetime.datetime.now()):
+    self.name = name
+    self.patient_id = patient_id
+    self.medical_history = medical_history
+    self.condition = condition
+    self.admission_date = admission_date
