@@ -224,6 +224,23 @@ class HospitalManagementApp:
             dosage_entry = tk.Entry(manage_prescriptions_window)
             dosage_entry.pack()
 
+            def add_prescription():
+                patient_name = selected_patient.get()
+                patient = next((p for p in self.consultation_queue if p['name'] == patient_name), None)
+                if patient:
+                    medication = medication_entry.get()
+                    dosage = dosage_entry.get()
+                    if 'medical_history' not in patient or not isinstance(patient['medical_history'], list):
+                        patient['medical_history'] = []
+                    patient['medical_history'].append(f"Prescription: {medication}, Dosage: {dosage}")
+                    messagebox.showinfo("Success", "Prescription added successfully.")
+                    # Remove the patient from the consultation queue
+                    self.consultation_queue.remove(patient)
+                    manage_prescriptions_window.destroy()
+                else:
+                    messagebox.showinfo("Error", "Patient not found.")
+
+            tk.Button(manage_prescriptions_window, text="Add Prescription", command=add_prescription).pack()
 
 
       def generate_reports(self):
