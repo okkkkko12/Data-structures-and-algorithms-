@@ -159,7 +159,13 @@ class HospitalManagementApp:
           tk.Button(manage_queue_window, text="Process Next Patient", command=self.process_next_patient).pack(fill=tk.X)
 
 
-
+    def add_patient_to_queue(self):
+        if self.patients_list:
+            for patient in self.patients_list:
+                self.consultation_queue.append(patient)  #we want to each patient to the queue
+            print("Patients added to the queue.")
+        else:
+            messagebox.showinfo("Info", "No patients available to add to the queue.")
 
 
 
