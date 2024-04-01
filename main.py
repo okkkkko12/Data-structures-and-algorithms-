@@ -90,12 +90,12 @@ class HospitalManagementApp:
           if not self.has_permission('add_patient'):
                 messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
                 return
-
-        # Assuming Patient is a class you have defined to hold patient details
-        new_patient = {"patient_id": patient_id, "name": name, "age": age, "medical_history": medical_history}
-        self.patients_list.append(new_patient)
-        print(f"Patient {name} added successfully.")
-        window.destroy()  # Close the add patient window
+                
+                
+            new_patient = {"patient_id": patient_id, "name": name, "age": age, "medical_history": medical_history}
+            self.patients_list.append(new_patient)
+            print(f"Patient {name} added successfully.")
+            window.destroy()  # Close the add patient window
 #def function for schedule_appointment to schedual for a patient consultation 
 
 def schedule_appointment(self):
@@ -133,7 +133,9 @@ def schedule_appointment(self):
             messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
             return
 
-    def save_appointment(self, patient_id, doctor_name, appointment_date, appointment_time, window):
-        if not self.has_permission('schedule_appointment'):
-            messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
-            return
+
+
+
+
+
+
