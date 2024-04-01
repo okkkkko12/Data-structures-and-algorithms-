@@ -196,6 +196,11 @@ class HospitalManagementApp:
                     messagebox.showinfo("Medical History", f"{patient_name}'s History:\n{history_text}")
                 else:
                     messagebox.showinfo("Error", "Patient not found.")
+                  
+            tk.Button(view_history_window, text="Show History", command=show_history).pack()
+        else:
+            messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
+
 
 
 
