@@ -1,13 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox 
 
-     # Patient class for their information
-class Patient:
-  def __init__(self, name, patient_id, medical_history, condition, admission_date=datetime.datetime.now()):
-    self.patient_id = patient_id                             # Patient's id
-    self.name = name               
-    self.age = age
-    self.medical_history=medical_history
     
       # Represent medical prescriptions, using the prescription class
 class Prescription:
