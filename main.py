@@ -99,4 +99,6 @@ def schedule_appointment(self):
      if not self.has_permission('schedule_appointment'):
           messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
             return
-          
+
+        schedule_appointment_window = tk.Toplevel(self.root)
+        schedule_appointment_window.title("Schedule Appointment")
