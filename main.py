@@ -131,24 +131,24 @@ class HospitalManagementApp:
         tk.Label(schedule_appointment_window, text="Patient ID:").pack()
         patient_id_entry = tk.Entry(schedule_appointment_window) #patient info input
         patient_id_entry.pack()
-#doctor info input entry lable
+# doctor info input entry lable
         tk.Label(schedule_appointment_window, text="Doctor Name:").pack()
         doctor_name_entry = tk.Entry(schedule_appointment_window)
         doctor_name_entry.pack()
-#appointment date info input entry lable
+# appointment date info input entry lable
         tk.Label(schedule_appointment_window, text="Appointment Date (YYYY-MM-DD):").pack()
         appointment_date_entry = tk.Entry(schedule_appointment_window)
         appointment_date_entry.pack()
-#appointment time info input entry lable
+# appointment time info input entry lable
         tk.Label(schedule_appointment_window, text="Appointment Time (HH:MM):").pack()
         appointment_time_entry = tk.Entry(schedule_appointment_window)
         appointment_time_entry.pack()
-#creating a button to schedule an appointment
+# creating a button to schedule an appointment
         tk.Button(schedule_appointment_window, text="Schedule",command=lambda: self.save_appointment(patient_id_entry.get(),doctor_name_entry.get(), appointment_date_entry.get(), appointment_time_entry.get(), schedule_appointment_window)).pack()
-#then defining a lambda function to call the save_appointment method with the entry values
+# then defining a lambda function to call the save_appointment method with the entry values
 
 
-#new def fucntyino for saving the appointment
+# new def fucntyino for saving the appointment
     def save_appointment(self, patient_id, doctor_name, appointment_date, appointment_time, window):
         if not self.has_permission('schedule_appointment'):
             messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
@@ -165,7 +165,7 @@ class HospitalManagementApp:
           tk.Button(manage_queue_window, text="Add Patient to Queue", command=self.add_patient_to_queue).pack(fill=tk.X)
           tk.Button(manage_queue_window, text="Process Next Patient", command=self.process_next_patient).pack(fill=tk.X)
 
-
+# How to put a patient in the queue for a consultation
     def add_patient_to_queue(self):
         if self.patients_list:
             for patient in self.patients_list:
@@ -173,7 +173,8 @@ class HospitalManagementApp:
             print("Patients added to the queue.")
         else:
             messagebox.showinfo("Info", "No patients available to add to the queue.")
-
+              
+   # Procedure for handling the next patient in the queue for consultation
     def process_next_patient(self):
         if self.consultation_queue:
             next_patient = self.consultation_queue.pop(0)  # Process the first patient in the queue
@@ -182,7 +183,7 @@ class HospitalManagementApp:
         else:
             messagebox.showinfo("Info", "No patients in the queue.")
 
-
+   # Method to view patient history
     def view_patient_history(self):
         if self.has_permission('view_patient_history'):
             view_history_window = tk.Toplevel(self.root)
@@ -208,6 +209,7 @@ class HospitalManagementApp:
         else:
             messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
 
+# Method to manage prescriptions
     def manage_prescriptions(self):
         if not self.consultation_queue:
             messagebox.showinfo("No Patients", "There are no patients in the consultation queue.")
@@ -253,8 +255,9 @@ class HospitalManagementApp:
       def generate_reports(self):
       # Define the functionality for generating reports here
             pass
+            
+      def has_permission(self, action):         # How to determine whether the user is authorized to perform a certain use
 
-      def has_permission(self, action):
            # Logic to check if the current user role has permission for the given action
              return action in user_roles_permissions.get(self.user_role, [])
             
