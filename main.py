@@ -66,7 +66,7 @@ class HospitalManagementApp:
                   return
 
             add_patient_window = tk.Toplevel(self.root)
-              add_patient_window.title("Add New Patient")
+            add_patient_window.title("Add New Patient")
 
             tk.Label(add_patient_window, text="Patient ID:").pack()
             patient_id_entry = tk.Entry(add_patient_window)
@@ -79,14 +79,29 @@ class HospitalManagementApp:
             tk.Label(add_patient_window, text="Age:").pack()
             age_entry = tk.Entry(add_patient_window)
             age_entry.pack()
-
+            
             tk.Label(add_patient_window, text="Medical History:").pack()
-            medical_history_entry = tk.Entry(add_patient_window)
-            medical_history_entry.pack()
+            medical_history_frame = tk.Frame(add_patient_window)
+            medical_history_frame.pack()
+            medical_history_entries = []
 
-            tk.Button(add_patient_window, text="Add Patient", command=lambda: self.save_patient(patient_id_entry.get(),name_entry.get(),age_entry.get(), medical_history_entry.get(),add_patient_window)).pack()
+      def add_medical_history_entry():
+            entry = tk.Entry(medical_history_frame)
+            entry.pack()
+            medical_history_entries.append(entry)
 
-    def save_patient(self, patient_id, name, age, medical_history, window):
+        tk.Button(add_patient_window, text="Add Medical History Entry", command=add_medical_history_entry).pack()
+        add_medical_history_entry() 
+
+        tk.Button(add_patient_window, text="Add Patient",
+                  command=lambda: self.save_patient(patient_id_entry.get(),
+                                                    name_entry.get(),
+                                                    age_entry.get(),
+                                                    [entry.get() for entry in medical_history_entries],
+                                                    add_patient_window)).pack()
+
+
+def save_patient(self, patient_id, name, age, medical_history, window):
           if not self.has_permission('add_patient'):
                 messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
                 return
