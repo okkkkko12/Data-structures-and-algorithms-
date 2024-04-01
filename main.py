@@ -266,6 +266,24 @@ class HospitalManagementApp:
         else:
             messagebox.showinfo("Info", "No patients in the queue.")
 
+
+    def display_queue(self):
+        if not self.consultation_queue:
+            messagebox.showinfo("Queue Empty", "There are no patients in the queue.")
+            return
+
+        queue_window = tk.Toplevel(self.root)
+        queue_window.title("Patient Consultation Queue")
+
+        tk.Label(queue_window, text="Patients in Queue:", font=('Arial', 14, 'bold')).pack(pady=10)
+
+        # Display each patient in the queue
+        for index, patient in enumerate(self.consultation_queue, start=1):
+            patient_info = f"{index}. Patient ID: {patient['patient_id']}, Name: {patient['name']}"
+            tk.Label(queue_window, text=patient_info).pack(anchor='w')
+
+
+
    # Method to view patient history
     def view_patient_history(self):
         if self.has_permission('view_patient_history'):
