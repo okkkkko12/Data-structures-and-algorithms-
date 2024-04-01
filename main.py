@@ -354,10 +354,10 @@ class HospitalManagementApp:
             dosage_entry.pack()
 
             def add_prescription():
-                patient_name = selected_patient.get()
+                patient_name = selected_patient.get() # Get the name of the selected patient
                 patient = next((p for p in self.consultation_queue if p['name'] == patient_name), None)
                 if patient:
-                    medication = medication_entry.get()
+                    medication = medication_entry.get() #getting the entered medication
                     dosage = dosage_entry.get()
                     if 'medical_history' not in patient or not isinstance(patient['medical_history'], list):
                         patient['medical_history'] = []
@@ -367,7 +367,7 @@ class HospitalManagementApp:
                     self.consultation_queue.remove(patient)
                     manage_prescriptions_window.destroy()
                 else:
-                    messagebox.showinfo("Error", "Patient not found.")
+                    messagebox.showinfo("Error", "Patient not found.") #it shows error message if patient not found
 
             tk.Button(manage_prescriptions_window, text="Add Prescription", command=add_prescription).pack()
 
