@@ -39,6 +39,7 @@ class HospitalManagementApp:
         
       # Method to show UI elements based on the user role
       def show_ui_elements_based_on_role(self):
+            # Define buttons for different functionalities
             buttons = {
             'add_patient': self.add_patient_button,
             'schedule_appointment': self.schedule_appointment_button,
@@ -48,13 +49,15 @@ class HospitalManagementApp:
             'generate_reports': self.generate_reports_button,
         }
 
+            # Loop through each button and show or hide based on user permissions
             for action, button in buttons.items():
                   if self.has_permission(action):
-                        button.pack(fill=tk.X)
+                        button.pack(fill=tk.X)   # show the buttom
                   else:
-                        button.pack_forget()
-
-              if self.has_permission('edit_patient'):
+                        button.pack_forget()     # hide the buttom
+                        
+            # Additional buttons based on specific permission
+            if self.has_permission('edit_patient'):
             self.update_patient_button.pack(fill=tk.X)
             self.remove_patient_button.pack(fill=tk.X)
 
