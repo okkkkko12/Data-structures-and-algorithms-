@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox 
 
+# the working code is in the pdf report because we faced some inconvenience with indentations here.
+
       # Represent medical prescriptions, using the prescription class
 class Prescription:
       def __init__(self, patient_id, doctor_id, medication, dosage):
