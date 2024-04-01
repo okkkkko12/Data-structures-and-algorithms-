@@ -94,3 +94,9 @@ class HospitalManagementApp:
         tk.Button(add_patient_window, text="Add Patient",
                   command=lambda: self.save_patient(patient_id_entry.get(),name_entry.get(),age_entry.get(), medical_history_entry.get(),add_patient_window)).pack()
 
+#def function for schedule_appointment to schedual for a patient consultation 
+def schedule_appointment(self):
+     if not self.has_permission('schedule_appointment'):
+          messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
+            return
+          
