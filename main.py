@@ -207,6 +207,17 @@ class HospitalManagementApp:
             return
         if self.has_permission('add_prescription'):
             # Function to add prescription and handle patient removal
+            def add_prescription():
+                patient_name = selected_patient.get()
+                patient = next((p for p in self.patients_list if p['name'] == patient_name), None)
+                if patient:
+                    medication = medication_entry.get()
+                    dosage = dosage_entry.get()
+                    # Check if medical_history is already a list, if not, convert it to a list
+                    if not isinstance(patient['medical_history'], list):
+                        patient['medical_history'] = [patient['medical_history']]
+                    patient['medical_history'].append(f"Prescription: {medication}, Dosage: {dosage}")
+                    messagebox.showinfo("Success", "Prescription added successfully.")
 
 
 
