@@ -303,18 +303,18 @@ class HospitalManagementApp:
 
 
 
-   # Method to view patient history
+      # Method to view patient history
     def view_patient_history(self):
-        if self.has_permission('view_patient_history'):
-            view_history_window = tk.Toplevel(self.root)
-            view_history_window.title("View Patient History")
+        if self.has_permission('view_patient_history'): #cheking if the user has permission to view patient history
+            view_history_window = tk.Toplevel(self.root) #create windown for view patient history
+            view_history_window.title("View Patient History")  # create the title of the window
 
             tk.Label(view_history_window, text="Select Patient:").pack()
             patient_names = [patient['name'] for patient in self.patients_list]
             selected_patient = tk.StringVar()
             selected_patient.set(patient_names[0])  # default value
             patient_menu = tk.OptionMenu(view_history_window, selected_patient, *patient_names)
-            patient_menu.pack()
+            patient_menu.pack() # "pack' the dropdown menu into the window
 
             def show_history():
                 patient_name = selected_patient.get()
