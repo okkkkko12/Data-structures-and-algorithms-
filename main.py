@@ -4,10 +4,10 @@ from tkinter import messagebox
       # Represent medical prescriptions, using the prescription class
 class Prescription:
       def __init__(self, patient_id, doctor_id, medication, dosage):
-                self.patient_id = patient_id                  # The patient's ID is attached to the prescription
-                self.doctor_id = doctor_id                # Doctor id who prescribed the medication
-                self.medication = medication                  # Prescription medication
-                self.dosage = dosage  
+            self.patient_id = patient_id                  # The patient's ID is attached to the prescription
+            self.doctor_id = doctor_id                # Doctor id who prescribed the medication
+            self.medication = medication                  # Prescription medication
+            self.dosage = dosage  
 
 class HospitalManagementApp:
       def __init__(self, root):
@@ -16,18 +16,18 @@ class HospitalManagementApp:
             self.user_role = 'admin'
 
         # Initialize data structures
-              self.patients_list = []
-              self.prescriptions_list = []
-              self.consultation_queue = []
+            self.patients_list = []
+            self.prescriptions_list = []
+            self.consultation_queue = []
 
         # Initially, hide main UI until role is selected
-              self.main_frame = tk.Frame(root)
-              self.main_frame.pack(fill=tk.BOTH, expand=True)
+            self.main_frame = tk.Frame(root)
+            self.main_frame.pack(fill=tk.BOTH, expand=True)
        
         # Move button creation to a separate method
-              self.create_buttons()
+            self.create_buttons()
         # Show main UI directly
-              self.initialize_ui_based_on_role()
+            self.initialize_ui_based_on_role()
 
       def initialize_ui_based_on_role(self):
             self.show_ui_elements_based_on_role()
@@ -45,9 +45,9 @@ class HospitalManagementApp:
 
             for action, button in buttons.items():
                   if self.has_permission(action):
-                      button.pack(fill=tk.X)
+                        button.pack(fill=tk.X)
                   else:
-                      button.pack_forget()
+                        button.pack_forget()
 
       def create_buttons(self):
         # Creating buttons for different functionalities with instance variables and packing them
@@ -90,10 +90,10 @@ class HospitalManagementApp:
                   entry.pack()
                   medical_history_entries.append(entry)
 
-              tk.Button(add_patient_window, text="Add Medical History Entry", command=add_medical_history_entry).pack()
-              add_medical_history_entry() 
+            tk.Button(add_patient_window, text="Add Medical History Entry", command=add_medical_history_entry).pack()
+            add_medical_history_entry() 
 
-              tk.Button(add_patient_window, text="Add Patient",command=lambda: self.save_patient(patient_id_entry.get(),
+            tk.Button(add_patient_window, text="Add Patient",command=lambda: self.save_patient(patient_id_entry.get(),
                                                     name_entry.get(),
                                                     age_entry.get(),
                                                     [entry.get() for entry in medical_history_entries],
@@ -102,7 +102,7 @@ class HospitalManagementApp:
 
       def save_patient(self, patient_id, name, age, medical_history, window):
             if not self.has_permission('add_patient'):
-                  messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
+            messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
                   return
                 
                 
