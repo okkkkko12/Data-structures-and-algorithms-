@@ -208,16 +208,22 @@ class HospitalManagementApp:
         if self.has_permission('add_prescription'):
             # Function to add prescription and handle patient removal
             def add_prescription():
-                patient_name = selected_patient.get()
-                patient = next((p for p in self.patients_list if p['name'] == patient_name), None)
-                if patient:
-                    medication = medication_entry.get()
-                    dosage = dosage_entry.get()
-                    # Check if medical_history is already a list, if not, convert it to a list
-                    if not isinstance(patient['medical_history'], list):
-                        patient['medical_history'] = [patient['medical_history']]
-                    patient['medical_history'].append(f"Prescription: {medication}, Dosage: {dosage}")
-                    messagebox.showinfo("Success", "Prescription added successfully.")
+                  patient_name = selected_patient.get()
+                  patient = next((p for p in self.patients_list if p['name'] == patient_name), None)
+                  if patient:
+                        medication = medication_entry.get()
+                        dosage = dosage_entry.get()
+                        if 'medical_history' not in patient or not isinstance(patient['medical_history'], list):
+                              patient['medical_history'] = []
+                        patient['medical_history'].append(f"Prescription: {medication}, Dosage: {dosage}")
+                        messagebox.showinfo("Success", "Prescription added successfully.")
+                        # Remove the patient from the consultation queue
+                        self.consultation_queue.remove(patient)
+                        manage_prescriptions_window.destroy()
+                  else:
+                    messagebox.showinfo("Error", "Patient not found.")
+            tk.Button(manage_prescriptions_window, text="Add Prescription", command=add_prescription).pack()
+
 
 
 
