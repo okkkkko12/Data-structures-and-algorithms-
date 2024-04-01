@@ -89,6 +89,7 @@ class HospitalManagementApp:
         medical_history_entry.pack()
 
         def update_patient_details():
+              # Take updated patient information out of the entry fields.
             patient_id = patient_id_entry.get()
             name = name_entry.get()
             age = age_entry.get()
@@ -100,35 +101,42 @@ class HospitalManagementApp:
                     patient['name'] = name
                     patient['age'] = age
                     patient['medical_history'] = medical_history
+                      # Display success message
                     messagebox.showinfo("Success", f"Patient {name} updated successfully.")
-                    update_window.destroy()
+                    update_window.destroy()    # close the update window
                     return
+       # Display an error message if the patient cannot be located.
             messagebox.showinfo("Error", "Patient not found.")
-
+       # Button to trigger the update_patient_details function
         tk.Button(update_window, text="Update Patient", command=update_patient_details).pack()
 
     def remove_patient(self):
+          # Create a window to remove a patient
         remove_window = tk.Toplevel(self.root)
         remove_window.title("Remove Patient")
 
+          # Entry field for entering patient ID
         tk.Label(remove_window, text="Patient ID:").pack()
         patient_id_entry = tk.Entry(remove_window)
         patient_id_entry.pack()
-
+          # remove the patient
         tk.Button(remove_window, text="Remove Patient",command=lambda: self.delete_patient(patient_id_entry.get(), remove_window)).pack()
 
     def delete_patient(self, patient_id, window):
         # Confirmation dialog
         response = messagebox.askyesno("Confirm", "Are you sure you want to remove this patient?")
         if response:
+              # Verify that the patient is listed in the patient database.
             patient_found = any(patient['patient_id'] == patient_id for patient in self.patients_list)
             if patient_found:
                 # Logic to remove the patient
                 self.patients_list = [patient for patient in self.patients_list if patient['patient_id'] != patient_id]
                 self.consultation_queue = [patient for patient in self.consultation_queue if
                                            patient['patient_id'] != patient_id]
+                  # Display success message
                 messagebox.showinfo("Success", "Patient removed successfully.")
             else:
+                  # If the patient is not found in the list, display an error message
                 messagebox.showinfo("Error", "Patient not found.")
             window.destroy()
         else:
