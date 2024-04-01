@@ -28,3 +28,10 @@ class Patient:
     self.medical_history = medical_history
     self.condition = condition
     self.admission_date = admission_date
+
+class Prescription:
+  def __int__(self, patient_id, doctor_name, medication, date_issued=datetime.datetime.now()):
+    self.patient_id = patient_id
+    self.doctor_name = doctor_name
+    self.medication = medication
+    self.date_issued = date_issued
