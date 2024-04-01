@@ -204,7 +204,7 @@ class HospitalManagementApp:
     def manage_prescriptions(self):
         if not self.consultation_queue:
             messagebox.showinfo("No Patients", "There are no patients in the consultation queue.")
-            
+            return
 
 
 
