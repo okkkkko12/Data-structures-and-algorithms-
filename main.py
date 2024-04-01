@@ -72,22 +72,30 @@ class HospitalManagementApp:
             patient_id_entry = tk.Entry(add_patient_window)
             patient_id_entry.pack()
 
-        tk.Label(add_patient_window, text="Name:").pack()
-        name_entry = tk.Entry(add_patient_window)
-        name_entry.pack()
+            tk.Label(add_patient_window, text="Name:").pack()
+            name_entry = tk.Entry(add_patient_window)
+            name_entry.pack()
 
             tk.Label(add_patient_window, text="Age:").pack()
             age_entry = tk.Entry(add_patient_window)
             age_entry.pack()
-#finished fixing indentation till here ^^
-        tk.Label(add_patient_window, text="Medical History:").pack()
-        medical_history_entry = tk.Entry(add_patient_window)
-        medical_history_entry.pack()
 
-        tk.Button(add_patient_window, text="Add Patient",
-                  command=lambda: self.save_patient(patient_id_entry.get(),name_entry.get(),age_entry.get(), medical_history_entry.get(),add_patient_window)).pack()
+            tk.Label(add_patient_window, text="Medical History:").pack()
+            medical_history_entry = tk.Entry(add_patient_window)
+            medical_history_entry.pack()
 
+            tk.Button(add_patient_window, text="Add Patient", command=lambda: self.save_patient(patient_id_entry.get(),name_entry.get(),age_entry.get(), medical_history_entry.get(),add_patient_window)).pack()
 
+    def save_patient(self, patient_id, name, age, medical_history, window):
+          if not self.has_permission('add_patient'):
+                messagebox.showinfo("Permission Denied", "You do not have permission to perform this action.")
+                return
+
+        # Assuming Patient is a class you have defined to hold patient details
+        new_patient = {"patient_id": patient_id, "name": name, "age": age, "medical_history": medical_history}
+        self.patients_list.append(new_patient)
+        print(f"Patient {name} added successfully.")
+        window.destroy()  # Close the add patient window
 #def function for schedule_appointment to schedual for a patient consultation 
 
 def schedule_appointment(self):
