@@ -141,7 +141,12 @@ class HospitalManagementApp:
       
             self.manage_prescriptions_button = tk.Button(self.main_frame, text="Manage Prescriptions", command=self.manage_prescriptions)
             self.generate_reports_button = tk.Button(self.main_frame, text="Generate Reports", command=self.generate_reports)
+            self.update_patient_button = tk.Button(self.main_frame, text="Update Patient Information",command=self.update_patient)
+            self.remove_patient_button = tk.Button(self.main_frame, text="Remove Patient",command=self.remove_patient)
+            self.display_queue_button = tk.Button(self.main_frame, text="Display Patient Queue",command=self.display_queue)
 
+            if self.has_permission('manage_queue'):
+                  self.display_queue_button.pack(fill=tk.X)
       
 
         # Adds new patient
