@@ -167,6 +167,13 @@ class HospitalManagementApp:
         else:
             messagebox.showinfo("Info", "No patients available to add to the queue.")
 
+    def process_next_patient(self):
+        if self.consultation_queue:
+            next_patient = self.consultation_queue.pop(0)  # Process the first patient in the queue
+            patient_name = next_patient['name']  # Get the patient's name from the dictionary
+            messagebox.showinfo("Info", f"Processing {patient_name}.")
+        else:
+            messagebox.showinfo("Info", "No patients in the queue.")
 
 
 
