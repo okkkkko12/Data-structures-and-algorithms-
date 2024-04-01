@@ -105,5 +105,9 @@ def schedule_appointment(self):
 
 # we want to assume the existence of a 'Doctor' class to get doctor names
         tk.Label(schedule_appointment_window, text="Patient ID:").pack()
-        patient_id_entry = tk.Entry(schedule_appointment_window)
+        patient_id_entry = tk.Entry(schedule_appointment_window) #patient info input
         patient_id_entry.pack()
+#doctor info input
+        tk.Label(schedule_appointment_window, text="Doctor Name:").pack()
+        doctor_name_entry = tk.Entry(schedule_appointment_window)
+        doctor_name_entry.pack()
