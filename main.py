@@ -35,3 +35,9 @@ class Prescription:
     self.doctor_name = doctor_name
     self.medication = medication
     self.date_issued = date_issued
+
+class Appointment:
+  def __int__(self, patient_id, doctor_name, appointment_time):
+    self.patient_id = patient_id
+    self.doctor_name = doctor_name
+    self.appointment_time = appointment_time
